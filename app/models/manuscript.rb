@@ -1,0 +1,2 @@
+class Manuscript < ApplicationRecord
+end
