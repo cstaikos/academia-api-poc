@@ -1,24 +1,14 @@
-# README
+# Academia API (POC)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Requirements:
 
-Things you may want to cover:
+- Ruby 2.3
+- Rails 5.2.0
+- Postgres server running locally (I use v9.4.5.0)
 
-* Ruby version
+## Instructions for running locally
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- `rake db:create` to create the database
+- `rake db:migrate` to run migrations
+- `rake db:seed` to seed database with 10 manuscripts
+- `rails s` to run app on localhost
