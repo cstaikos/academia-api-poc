@@ -8,7 +8,7 @@ class ManuscriptsController < ApplicationController
 
   def show
     @manuscript = Manuscript.find(params[:id])
-    json_response(@manuscript)
+    render json: @manuscript.as_json(include: [:works_cited, :references_to])
   end
 
   def create
