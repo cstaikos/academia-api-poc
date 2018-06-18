@@ -1,22 +1,20 @@
 class ManuscriptsController < ApplicationController
-  include Response
-
   def index
     @manuscripts = Manuscript.all
-    json_response(@manuscripts)
+    render json: @manuscripts, status: :ok
   end
 
   def show
     @manuscript = Manuscript.find(params[:id])
-    render json: @manuscript.as_json(include: [:works_cited, :references_to])
+    render json: @manuscript.as_json(include: [:works_cited, :cited_by]), status: :ok
   end
 
   def create
     @manuscript = Manuscript.create(manuscript_params)
     if @manuscript.save
-      json_response(@manuscript, :created)
+      render json: @manuscript, status: :created
     else
-      json_response({error: "Error creating manuscript"}, :bad_request)
+      render json: {error: "Error creating manuscript"}, status: :bad_request
     end
   end
 
@@ -24,18 +22,18 @@ class ManuscriptsController < ApplicationController
     @manuscript = Manuscript.find(params[:id])
     @manuscript.update(manuscript_params)
     if @manuscript.save
-      json_response(@manuscript)
+      render json: @manuscript, status: :ok
     else
-      json_response({error: "Error updating manuscript"}, :bad_request)
+      render json: {error: "Error updating manuscript"}, status: :bad_request
     end
   end
 
   def destroy
     @manuscript = Manuscript.find(params[:id])
     if @manuscript.destroy
-      json_response({})
+      render json: nil, status: :no_content
     else
-      json_response({error: "Error deleting manuscript"}, :bad_request)
+      render json: {error: "Error deleting manuscript"}, status: :bad_request
     end
   end
 
@@ -45,9 +43,9 @@ class ManuscriptsController < ApplicationController
 
     @citation = Citation.create(citer_id: @manuscript.id, citee_id: citee_id)
     if @citation.save
-      render json: @manuscript.as_json(include: [:works_cited, :references_to])
+      render json: @manuscript.as_json(include: [:works_cited, :cited_by])
     else
-      json_response({error: "Error saving citation"}, :bad_request)
+      render json: {error: "Error saving citation"}, status: :bad_request
     end
   end
 
