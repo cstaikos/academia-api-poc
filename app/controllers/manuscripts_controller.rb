@@ -39,6 +39,18 @@ class ManuscriptsController < ApplicationController
     end
   end
 
+  def add_citation
+    @manuscript = Manuscript.find(params[:manuscript_id])
+    citee_id = params[:citee_id]
+
+    @citation = Citation.create(citer_id: @manuscript.id, citee_id: citee_id)
+    if @citation.save
+      render json: @manuscript.as_json(include: [:works_cited, :references_to])
+    else
+      json_response({error: "Error saving citation"}, :bad_request)
+    end
+  end
+
   def manuscript_params
     params.require(:manuscript).permit(:title)
   end
