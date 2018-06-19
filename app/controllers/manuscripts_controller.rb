@@ -1,12 +1,12 @@
 class ManuscriptsController < ApplicationController
   def index
     @manuscripts = Manuscript.all
-    render json: @manuscripts, status: :ok
+    render json: @manuscripts.as_json(include: [:discipline]), status: :ok
   end
 
   def show
     @manuscript = Manuscript.find(params[:id])
-    render json: @manuscript.as_json(include: [:works_cited, :cited_by]), status: :ok
+    render json: @manuscript.as_json(include: [:discipline, :works_cited, :cited_by]), status: :ok
   end
 
   def create
