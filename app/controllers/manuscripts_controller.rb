@@ -49,6 +49,11 @@ class ManuscriptsController < ApplicationController
     end
   end
 
+  def search
+    @manuscripts = Manuscript.where('title ILIKE ?', "#{params[:query]}%")
+    render json: @manuscripts.as_json(include: [:discipline]), status: :ok
+  end
+
   def manuscript_params
     params.require(:manuscript).permit(:title)
   end
