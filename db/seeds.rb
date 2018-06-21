@@ -47,34 +47,48 @@ Discipline.create(name: "Public Administration", parent_id: 5)
 Discipline.create(name: "Social Work", parent_id: 5)
 Discipline.create(name: "Transportation", parent_id: 5)
 
-Manuscript.create(title: "Original paper", discipline_id: Discipline.all.sample.id)
+# Manuscript.create(title: "Original paper", discipline_id: Discipline.all.sample.id)
+#
+# Manuscript.create(title: "Second tier 1", discipline_id: Discipline.all.sample.id)
+# Manuscript.create(title: "Second tier 2", discipline_id: Discipline.all.sample.id)
+# Manuscript.create(title: "Second tier 3", discipline_id: Discipline.all.sample.id)
+#
+# Manuscript.create(title: "Third tier 1", discipline_id: Discipline.all.sample.id)
+# Manuscript.create(title: "Third tier 2", discipline_id: Discipline.all.sample.id)
+# Manuscript.create(title: "Third tier 3", discipline_id: Discipline.all.sample.id)
+# Manuscript.create(title: "Third tier 4", discipline_id: Discipline.all.sample.id)
+# Manuscript.create(title: "Third tier 5", discipline_id: Discipline.all.sample.id)
+# Manuscript.create(title: "Third tier 6", discipline_id: Discipline.all.sample.id)
+# Manuscript.create(title: "Third tier 7", discipline_id: Discipline.all.sample.id)
+# Manuscript.create(title: "Third tier 8", discipline_id: Discipline.all.sample.id)
+# Manuscript.create(title: "Third tier 9", discipline_id: Discipline.all.sample.id)
+#
+# Citation.create(citer_id: 2, citee_id: 1)
+# Citation.create(citer_id: 3, citee_id: 1)
+# Citation.create(citer_id: 4, citee_id: 1)
+#
+# Citation.create(citer_id: 5, citee_id: 2)
+# Citation.create(citer_id: 6, citee_id: 2)
+# Citation.create(citer_id: 7, citee_id: 2)
+#
+# Citation.create(citer_id: 8, citee_id: 3)
+# Citation.create(citer_id: 9, citee_id: 3)
+# Citation.create(citer_id: 10, citee_id: 3)
+#
+# Citation.create(citer_id: 11, citee_id: 4)
+# Citation.create(citer_id: 12, citee_id: 4)
+# Citation.create(citer_id: 13, citee_id: 4)
 
-Manuscript.create(title: "Second tier 1", discipline_id: Discipline.all.sample.id)
-Manuscript.create(title: "Second tier 2", discipline_id: Discipline.all.sample.id)
-Manuscript.create(title: "Second tier 3", discipline_id: Discipline.all.sample.id)
+for i in 1..100 do
+  Manuscript.create(
+    title: Faker::Book.title,
+    discipline_id: Discipline.all.sample.id
+  )
+end
 
-Manuscript.create(title: "Third tier 1", discipline_id: Discipline.all.sample.id)
-Manuscript.create(title: "Third tier 2", discipline_id: Discipline.all.sample.id)
-Manuscript.create(title: "Third tier 3", discipline_id: Discipline.all.sample.id)
-Manuscript.create(title: "Third tier 4", discipline_id: Discipline.all.sample.id)
-Manuscript.create(title: "Third tier 5", discipline_id: Discipline.all.sample.id)
-Manuscript.create(title: "Third tier 6", discipline_id: Discipline.all.sample.id)
-Manuscript.create(title: "Third tier 7", discipline_id: Discipline.all.sample.id)
-Manuscript.create(title: "Third tier 8", discipline_id: Discipline.all.sample.id)
-Manuscript.create(title: "Third tier 9", discipline_id: Discipline.all.sample.id)
-
-Citation.create(citer_id: 2, citee_id: 1)
-Citation.create(citer_id: 3, citee_id: 1)
-Citation.create(citer_id: 4, citee_id: 1)
-
-Citation.create(citer_id: 5, citee_id: 2)
-Citation.create(citer_id: 6, citee_id: 2)
-Citation.create(citer_id: 7, citee_id: 2)
-
-Citation.create(citer_id: 8, citee_id: 3)
-Citation.create(citer_id: 9, citee_id: 3)
-Citation.create(citer_id: 10, citee_id: 3)
-
-Citation.create(citer_id: 11, citee_id: 4)
-Citation.create(citer_id: 12, citee_id: 4)
-Citation.create(citer_id: 13, citee_id: 4)
+manuscripts = Manuscript.all
+for i in 1..300 do
+  manuscript = manuscripts.sample
+  possible_citees = manuscripts - [manuscript] - manuscript.works_cited - manuscript.cited_by
+  Citation.create(citer_id: manuscript.id, citee_id: possible_citees.sample.id)
+end
