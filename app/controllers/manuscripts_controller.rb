@@ -57,6 +57,6 @@ class ManuscriptsController < ApplicationController
   end
 
   def manuscript_params
-    params.require(:manuscript).permit(:title)
+    params.require(:manuscript).permit(:title, :discipline_id)
   end
 end
