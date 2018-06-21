@@ -50,7 +50,9 @@ class ManuscriptsController < ApplicationController
   end
 
   def search
+    @citee = Manuscript.find(params[:manuscript_id])
     @manuscripts = Manuscript.where('title ILIKE ?', "#{params[:query]}%")
+    @manuscripts = @manuscripts - [@citee] - @citee.works_cited - @citee.cited_by
     render json: @manuscripts.as_json(include: [:discipline]), status: :ok
   end
 
