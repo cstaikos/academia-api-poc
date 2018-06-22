@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_19_155453) do
+ActiveRecord::Schema.define(version: 2018_06_21_203116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,9 +31,15 @@ ActiveRecord::Schema.define(version: 2018_06_19_155453) do
 
   create_table "manuscripts", force: :cascade do |t|
     t.string "title"
+    t.string "content_url"
     t.integer "discipline_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "content"
+    t.string "content_file_name"
+    t.string "content_content_type"
+    t.integer "content_file_size"
+    t.datetime "content_updated_at"
   end
 
 end

@@ -49,6 +49,14 @@ class ManuscriptsController < ApplicationController
     end
   end
 
+  def upload_file
+    @manuscript = Manuscript.find(params[:manuscript_id])
+    @manuscript.content = params[:CONTENTDATA] if params[:CONTENTDATA].present?
+    @manuscript.save #TODO error handling
+
+
+  end
+
   def search
     @citee = Manuscript.find(params[:manuscript_id])
     @manuscripts = Manuscript.where('title ILIKE ?', "#{params[:query]}%")

@@ -5,4 +5,7 @@ class Manuscript < ApplicationRecord
   has_many :cited_by, through: :citations_to, source: :citer
 
   belongs_to :discipline
+
+  has_attached_file :content
+  do_not_validate_attachment_file_type :content # TODO validate for PDF?
 end
