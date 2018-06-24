@@ -1,9 +1,11 @@
 require "rails_helper"
 
 describe "Manuscripts API" do
-  it 'does the thing' do
-    FactoryBot.create_list(:manuscript, 10)
+  it 'Get all manuscripts works' do
+    FactoryBot.create_list(:discipline_with_manuscripts, 10)
     get '/manuscripts'
-    puts response.body
+    expect(response).to be_success
+    body = JSON.parse(response.body)
+    expect(body.size).to eq(10)
   end
 end
