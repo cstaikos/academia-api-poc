@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/current_user' => 'users#current_user'
 
   resources :manuscripts
+  resources :users
 
   resource :auth, only: %i[create]
 end
