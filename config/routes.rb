@@ -9,4 +9,5 @@ Rails.application.routes.draw do
 
   resources :manuscripts
 
+  resource :auth, only: %i[create]
 end
