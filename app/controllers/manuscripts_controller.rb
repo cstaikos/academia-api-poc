@@ -1,4 +1,6 @@
 class ManuscriptsController < ApplicationController
+  skip_before_action :authenticate_user, only: [:index, :show, :search]
+
   def index
     @manuscripts = Manuscript.all
     render json: @manuscripts.as_json(include: [:discipline]), status: :ok

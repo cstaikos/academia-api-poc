@@ -1,4 +1,6 @@
 class DisciplinesController < ApplicationController
+  skip_before_action :authenticate_user
+
   def index
     @disciplines = Discipline.all
     render json: @disciplines, status: :ok
