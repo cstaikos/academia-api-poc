@@ -53,8 +53,6 @@ class ManuscriptsController < ApplicationController
     @manuscript = Manuscript.find(params[:manuscript_id])
     @manuscript.content = params[:CONTENTDATA] if params[:CONTENTDATA].present?
     @manuscript.save #TODO error handling
-
-
   end
 
   def search
@@ -65,6 +63,6 @@ class ManuscriptsController < ApplicationController
   end
 
   def manuscript_params
-    params.require(:manuscript).permit(:title, :discipline_id)
+    params.require(:manuscript).permit(:title, :discipline_id, :publication_date, :abstract)
   end
 end
