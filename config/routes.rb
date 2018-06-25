@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get '/disciplines/top' => 'disciplines#top_level'
   get '/disciplines/:discipline_id/children' => 'disciplines#children'
 
+  get '/current_user' => 'users#current_user'
+
   resources :manuscripts
 
   resource :auth, only: %i[create]
